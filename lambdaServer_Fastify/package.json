@@ -1,18 +1,20 @@
 {
-  "name": "lambdaServer",
+  "name": "lambdaServer_Fastify",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy" "serverless deploy > serverless_notes.txt"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-fastify": "^3.0.0-alpha.3",
     "apollo-server-lambda": "^2.17.0",
-    "aws-sdk": "^2.751.0",
+    "aws-lambda-fastify": "^1.4.4",
+    "aws-sdk": "^2.753.0",
+    "fastify": "^3.4.1",
     "graphql": "^15.3.0"
   }
 }
