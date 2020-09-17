@@ -1,0 +1,20 @@
+{
+  "name": "lambdaServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "serverless deploy > serverless_notes.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-lambda": "^2.17.0",
+    "aws-lambda-fastify": "^1.4.4",
+    "aws-sdk": "^2.751.0",
+    "fastify": "^3.4.1",
+    "graphql": "^15.3.0"
+  }
+}

@@ -1,0 +1,27 @@
+const { gql } = require('apollo-server-lambda');
+
+const typeDefs = gql`
+  type Driver {
+    driver: String
+    f1constructor: String
+    pointsCumulative: [Int]
+  }
+
+  type Comment {
+    comment: String
+    id: String
+  }
+
+  type Query {
+    f1drivers: [Driver]
+    f1driver(driver: String!): Driver
+    f1comments: [Comment]
+  }
+
+  type Mutation {
+    addf1comment(comment: String!): Comment
+    deletef1comment(id: String!): Comment
+  }
+`;
+
+module.exports = typeDefs;
