@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-lambda');
+const { gql } = require('apollo-server-fastify');
 
 const typeDefs = gql`
   type Driver {
