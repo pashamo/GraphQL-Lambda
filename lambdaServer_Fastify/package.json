@@ -11,10 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-fastify": "^3.0.0-alpha.3",
     "apollo-server-lambda": "^2.17.0",
     "aws-lambda-fastify": "^1.4.4",
     "aws-sdk": "^2.751.0",
     "fastify": "^3.4.1",
+    "fastify-cors": "^4.1.0",
     "graphql": "^15.3.0"
   }
 }
