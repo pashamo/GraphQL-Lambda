@@ -23,6 +23,8 @@ const init = () => {
 }
 
 if (require.main === module) {
+  //This condition allows to run server locally 
+  //eg. node src/fastify_app
   init().listen(4000, err => {
     if (err) {
       console.error(err);
@@ -30,5 +32,6 @@ if (require.main === module) {
     console.log('Listening on port 4000');
   })
 } else {
+  //This condition exports the fastify app for lambda purpose
   module.exports = init;
 }
