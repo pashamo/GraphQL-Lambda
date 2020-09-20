@@ -1,0 +1,19 @@
+# serverless.yml
+
+service: federation-service-drivers
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-2
+functions:
+  drivers:
+    handler: drivers.driversHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+    - http:
+        path: graphql
+        method: get
+        cors: true

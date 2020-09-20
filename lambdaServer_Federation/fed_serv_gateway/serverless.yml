@@ -1,0 +1,19 @@
+# serverless.yml
+
+service: federation-gateway
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-2
+functions:
+  gateway:
+    handler: gateway.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+    - http:
+        path: graphql
+        method: get
+        cors: true
