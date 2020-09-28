@@ -25,8 +25,3 @@ functions:
   express_lambda: express-graphql-lambda-dev-express_lambda
 layers:
   None
-
-**********
-Serverless: Announcing an enhanced experience for Serverless Full-Stack Applications: https://github.com/serverless-components/fullstack-app
-**********
-

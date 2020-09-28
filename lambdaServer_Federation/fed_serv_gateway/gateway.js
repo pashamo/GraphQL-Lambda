@@ -20,7 +20,7 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({ 
   gateway,
-  subscriptions: false
+  subscriptions: false,
 });
 
 module.exports.graphqlHandler = server.createHandler();

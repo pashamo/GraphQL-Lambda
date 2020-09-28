@@ -4,14 +4,14 @@ const configDDB = require('./config');
 configDDB();
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-//const NEW_COMMENT = "NEW_COMMENT";
+const NEW_COMMENT = "NEW_COMMENT";
 
 module.exports = {
-  // Subscription: {
-  //   newComment: {
-  //     subscribe: (_, __, {pubsub}) => pubsub.asyncIterator(NEW_COMMENT)
-  //   }
-  // },
+  Subscription: {
+    newComment: {
+      subscribe: (_, __, {pubsub}) => pubsub.asyncIterator(NEW_COMMENT)
+    }
+  },
 
   Query: {
     //retreive all drivers
@@ -31,6 +31,45 @@ module.exports = {
       })
 
       return await driversData;
+    },
+
+
+    f1driverfilter: async (parent,args) => {
+      let filterexpression = "";
+      let exprattvals = {};
+
+      args.f1constructor.map(team => {
+        let tempKey = ":"+team.replace(/\s/g, ''); 
+        console.log(tempKey);
+        exprattvals = {
+          ...exprattvals, 
+          [tempKey]: team
+        };
+        if (filterexpression == "") {
+          filterexpression += "f1constructor = "+tempKey;
+        } else {
+          filterexpression += " OR f1constructor = "+tempKey;
+        }
+      });
+
+      let driverData = new Promise(async (resolve,reject) => {      
+        let params = {
+          TableName: "DEMO_F1DriversStandings",
+          FilterExpression: filterexpression,
+          ExpressionAttributeValues: exprattvals
+        };
+
+        await docClient.scan(params, (err, data) => {
+          if (err) {
+            console.error("Unable to retreive Driver:", JSON.stringify(err,null,2));
+          } else {
+            //console.log("GetItem succeeded:", JSON.stringify(data.Item,null,2));
+            resolve(data.Items);
+          }
+        })
+      })
+ 
+      return driverData;
     },
 
     //retreive a single driver given driver name
@@ -92,12 +131,12 @@ module.exports = {
           console.error("Unable to add item", JSON.stringify(err,null,2));
         } else {
 
-          // pubsub.publish(NEW_COMMENT, {
-          //   newComment: {
-          //     comment: params.Item.comment,
-          //     id: params.Item.id
-          //   }
-          // })
+          pubsub.publish(NEW_COMMENT, {
+            newComment: {
+              comment: params.Item.comment,
+              id: params.Item.id
+            }
+          })
 
           console.log("PutItem succeeded:", JSON.stringify(data,null,2));
         }
